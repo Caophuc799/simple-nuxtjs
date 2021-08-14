@@ -1,7 +1,11 @@
 <template>
-  <h2>List Products</h2>
+  <div>
+    <h2>Nuxt child</h2>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  layout: 'products', // it only has in nuxt
+}
 </script>
