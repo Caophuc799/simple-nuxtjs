@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import AdminPostForm from '@/components/Admin/AdminPostForm'
 
 export default {
@@ -15,9 +14,10 @@ export default {
     AdminPostForm
   },
   layout: 'admin',
+  middleware: ['check-auth', 'auth'],
   async asyncData(context) {
     try {
-      const res = await axios.get(`${process.env.VUE_APP_API_URL}/posts/${context.params.postId}.json`)
+      const res = await context.app.$axios.get(`/posts/${context.params.postId}.json`)
       if (!res.data) {
         return context.error(new Error('Can not found'))
       }

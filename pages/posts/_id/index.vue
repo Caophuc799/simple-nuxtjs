@@ -3,7 +3,7 @@
     <section class="post">
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Last updated on {{ loadedPost.updatedDate | date }}</div>
         <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
       <p class="post-content">{{ loadedPost.content }}</p>
@@ -15,12 +15,11 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   async asyncData(context) {
     try {
-      const res = await axios.get(`${process.env.VUE_APP_API_URL}/posts/${context.params.id}.json`)
+      const res = await context.app.$axios.get(`/posts/${context.params.id}.json`)
       if (!res.data) {
         return context.error(new Error('Can not found'))
       }
